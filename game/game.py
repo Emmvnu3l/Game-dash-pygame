@@ -6,6 +6,7 @@ from .config import* ## importación de las configuraciónes
 from .colors import* ## importación de colores
 from .platform import Platform
 from .player import Player
+from .wall import Wall
 
 class Game:
     def __init__(self):
@@ -25,9 +26,11 @@ class Game:
     def generate_elements(self):
         self.platform = Platform()
         self.player = Player(100, self.platform.rect.top- 200)
+        self.wall = Wall(500, self.platform.rect.top)
         self.sprites = pygame.sprite.Group()
         self.sprites.add(self.platform)
         self.sprites.add(self.player)
+        self.sprites.add(self.wall)
 
     def run(self):
         while self.running:

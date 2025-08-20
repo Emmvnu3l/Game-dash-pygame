@@ -15,4 +15,8 @@ HEIGHT_PLAYER = 40
 PLAYER_GRAV = 1.8
 
 
+## Wall
+SPEED = 1
+
+
 
