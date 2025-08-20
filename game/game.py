@@ -24,7 +24,7 @@ class Game:
     
     def generate_elements(self):
         self.platform = Platform()
-        self.player = Player()
+        self.player = Player(100, self.platform.rect.top- 200)
         self.sprites = pygame.sprite.Group()
         self.sprites.add(self.platform)
         self.sprites.add(self.player)
@@ -47,6 +47,8 @@ class Game:
     def update(self):
         pygame.display.flip() ## flip actualiza todo la superficie
 
+
+        self.sprites.update() ## todos los elementos de las listas ejecutaran su metodo update
     def stop(self):
         pass
 
