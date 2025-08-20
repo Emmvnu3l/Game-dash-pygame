@@ -2,8 +2,9 @@ import pygame;
 import sys;
 
 
-from .config import *
- 
+from .config import*;## importación de las configuraciónes
+from .colors import*; ## importación de colores
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -31,7 +32,7 @@ class Game:
                 sys.exit()
                 
     def draw(self):
-        pass
+        self.surface.fill(LIGHT_BLUE)
 
     def update(self):
         pygame.display.flip() ## flip actualiza todo la superficie
