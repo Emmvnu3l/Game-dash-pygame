@@ -5,6 +5,7 @@ import sys;
 from .config import*;## importación de las configuraciónes
 from .colors import*; ## importación de colores
 from .platform import Platform;
+from .player import Player;
 
 class Game:
     def __init__(self):
@@ -23,8 +24,10 @@ class Game:
     
     def generate_elements(self):
         self.platform = Platform()
+        self.player = Player()
         self.sprites = pygame.sprite.Group()
         self.sprites.add(self.platform)
+        self.sprites.add(self.player)
 
     def run(self):
         while self.running:
@@ -39,8 +42,8 @@ class Game:
                 sys.exit()
                 
     def draw(self):
-        self.surface.fill(LIGHT_BLUE)
-        self.sprites.draw(self.surface)
+        self.surface.fill(LIGHT_BLUE) 
+        self.sprites.draw(self.surface) ##Pintar la superficie
     def update(self):
         pygame.display.flip() ## flip actualiza todo la superficie
 
