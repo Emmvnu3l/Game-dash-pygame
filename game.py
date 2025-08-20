@@ -1,23 +1,38 @@
 import pygame;
+import sys;
 
 class Game:
     def __init__(self):
-        pass
+        pygame.init()
+        self.surface = pygame.display.set_mode((800, 400))
+        pygame.display.set_caption('Game')
+        
+        self.running = True
 
     def start(self):
-        pass
+        self.new()    
     
     def new(self):
-        pass
+        self.run()
 
     def run(self):
-        pass
+        while self.running:
+            self.events()
+            self.draw()
+            self.update()
     def events(self):
-        pass
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                self.running = False
+                pygame.quit()
+                sys.exit()
+                
     def draw(self):
         pass
+
     def update(self):
-        pass
+        pygame.display.flip() ## flip actualiza todo la superficie
     def stop(self):
+        
         pass
 
