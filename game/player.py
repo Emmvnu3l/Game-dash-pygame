@@ -16,12 +16,21 @@ class Player(pygame.sprite.Sprite):
         self.rect.bottom = bottom
         self.pos_y = self.rect.bottom
         self.vel_y = 0
+
+    #metodo para que el player no sobrepase la plataforma
+    def validation_plataform(self, plataform):
+        result = pygame.sprite.collide_rect(self,plataform)
+        if result: 
+            self.pos_y = plataform.rect.top
+            self.vel_y = 0
+
+
     def update_pos(self):
         self.vel_y += PLAYER_GRAV   # aplicamos gravedad a la velocidad
         self.pos_y += self.vel_y   
-        if self.pos_y >= HEIGHT - 40:  
-            self.pos_y = HEIGHT - 40
-            self.vel_y = 0
+
+
+
              
     def update(self):
         self.update_pos()

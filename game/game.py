@@ -46,8 +46,7 @@ class Game:
         self.sprites.draw(self.surface) ##Pintar la superficie
     def update(self):
         pygame.display.flip() ## flip actualiza todo la superficie
-
-
+        self.player.validation_plataform(self.platform)
         self.sprites.update() ## todos los elementos de las listas ejecutaran su metodo update
     def stop(self):
         pass
