@@ -1,8 +1,8 @@
 import pygame
 
 
-from .colors import *
-from .config import *
+from .colors import*
+from .config import*
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, left, bottom):
@@ -18,12 +18,14 @@ class Player(pygame.sprite.Sprite):
         self.vel_y = 0
 
     #metodo para que el player no sobrepase la plataforma
-    def validation_plataform(self, plataform):
-        result = pygame.sprite.collide_rect(self,plataform)
+    def validation_plataform(self, platform):
+        result = pygame.sprite.collide_rect(self,platform)
         if result: 
-            self.pos_y = plataform.rect.top
+            self.pos_y = platform.rect.top
             self.vel_y = 0
 
+    def jump(self):
+        self.vel_y = -23  
 
     def update_pos(self):
         self.vel_y += PLAYER_GRAV   # aplicamos gravedad a la velocidad

@@ -1,11 +1,11 @@
-import pygame;
-import sys;
+import pygame
+import sys
 
 
-from .config import*;## importación de las configuraciónes
-from .colors import*; ## importación de colores
-from .platform import Platform;
-from .player import Player;
+from .config import* ## importación de las configuraciónes
+from .colors import* ## importación de colores
+from .platform import Platform
+from .player import Player
 
 class Game:
     def __init__(self):
@@ -41,13 +41,17 @@ class Game:
                 pygame.quit()
                 sys.exit()
                 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_a:
+                    self.player.jump()
+                            
     def draw(self):
         self.surface.fill(LIGHT_BLUE) 
         self.sprites.draw(self.surface) ##Pintar la superficie
     def update(self):
         pygame.display.flip() ## flip actualiza todo la superficie
-        self.player.validation_plataform(self.platform)
         self.sprites.update() ## todos los elementos de las listas ejecutaran su metodo update
+        self.player.validation_plataform(self.platform)
     def stop(self):
         pass
 

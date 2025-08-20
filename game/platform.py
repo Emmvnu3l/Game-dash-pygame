@@ -1,7 +1,7 @@
 import pygame
 
-from .config import *
-from .colors import *
+from .config import*
+from .colors import*
 class Platform(pygame.sprite.Sprite):
 
     def __init__(self):
@@ -15,4 +15,3 @@ class Platform(pygame.sprite.Sprite):
         self.rect.x = 0
         self.rect.y = HEIGHT - 40
 
-        
