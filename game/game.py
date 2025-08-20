@@ -29,10 +29,10 @@ class Game:
                 
     def draw(self):
         pass
-
+    
     def update(self):
         pygame.display.flip() ## flip actualiza todo la superficie
+
     def stop(self):
-        
         pass
 
