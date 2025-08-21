@@ -77,7 +77,13 @@ class Game:
                     self.stop()
             self.sprites.update() ## todos los elementos de las listas ejecutaran su metodo update
             self.player.validation_plataform(self.platform)
-
+            self.update_elements(self.walls)
+            self.generate_walls()
+            ## Metodo para limpiar elementos
+    def update_elements(self, elements):
+        for element in elements:
+            if not element.rect.right > 0:
+                element.kill()
 
     def stop(self):
         self.player.stop()
