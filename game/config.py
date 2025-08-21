@@ -17,6 +17,7 @@ PLAYER_GRAV = 1.8
 
 ## Wall
 SPEED = 1
+MAX_WALLS = 10
 
 
 
