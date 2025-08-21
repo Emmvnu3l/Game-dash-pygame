@@ -67,6 +67,9 @@ class Game:
         pygame.display.flip() ## flip actualiza todo la superficie
         self.sprites.update() ## todos los elementos de las listas ejecutaran su metodo update
         self.player.validation_plataform(self.platform)
+        wall = self.player.collide_with(self.walls)
+        if wall:
+            self.stop()
     def stop(self):
-        pass
+        print("colision")
 

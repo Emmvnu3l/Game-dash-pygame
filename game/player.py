@@ -20,7 +20,12 @@ class Player(pygame.sprite.Sprite):
         ##validación de salto c10
         self.can_jump= False
 
-
+    def collide_with(self, sprites):
+        ## jugador, lista de sprite, 
+        objects = pygame.sprite.spritecollide(self, sprites, False)
+        if objects:
+            return objects[0]
+        
     #metodo para que el player no sobrepase la plataforma
     def validation_plataform(self, platform):
         result = pygame.sprite.collide_rect(self,platform)
