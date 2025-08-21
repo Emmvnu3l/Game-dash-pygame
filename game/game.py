@@ -1,6 +1,7 @@
 import pygame
 import sys
 import random
+import os
 
 from .config import* ## importación de las configuraciónes
 from .colors import* ## importación de colores
@@ -18,10 +19,15 @@ class Game:
         self.running = True
         self.playing = True
 
+        ## creacion de ruta de sonidos
+        self.dir = os.path.dirname(__file__)
+        self.dir_sounds = os.path.join(self.dir, 'sources','sounds')
+
     def start(self):
         self.new()    
     
     def new(self):
+        self.score = 0
         self.generate_elements()
         self.run()
     
@@ -91,9 +97,18 @@ class Game:
                     self.player.skid(wall)
                 else:    
                     self.stop()
+
+            coin = self.player.collide_with(self.coins)
+            if coin:
+                self.score +=1
+                coin.kill()
+                sound = pygame.mixer.Sound(os.path.join(self.dir_sounds, 'coin.mp3'))
+                sound.play()
+                print(self.score)
             self.sprites.update() ## todos los elementos de las listas ejecutaran su metodo update
             self.player.validation_plataform(self.platform)
             self.update_elements(self.walls)
+            self.update_elements(self.coins)
             self.generate_walls()
             ## Metodo para limpiar elementos
     def update_elements(self, elements):
@@ -102,7 +117,9 @@ class Game:
                 element.kill()
 
     def stop(self):
-        self.player.stop()
+        sound = pygame.mixer.Sound(os.path.join(self.dir_sounds, 'lose.mp3'))
+        sound.play()
+        self.player.stop() 
         self.stop_element(self.walls)
         self.playing = False
 
