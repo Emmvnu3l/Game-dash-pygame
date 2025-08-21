@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
 
         ##validación de salto c10
         self.can_jump= False
-
+        self.playing = True
     def collide_with(self, sprites):
         ## jugador, lista de sprite, 
         objects = pygame.sprite.spritecollide(self, sprites, False)
@@ -47,5 +47,10 @@ class Player(pygame.sprite.Sprite):
 
              
     def update(self):
-        self.update_pos()
+        if self.playing:
+            self.update_pos()
         self.rect.bottom = self.pos_y
+
+    def stop(self):
+        self.playing = False
+

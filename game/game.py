@@ -15,6 +15,7 @@ class Game:
         pygame.display.set_caption(TITLE)
         self.clock = pygame.time.Clock()
         self.running = True
+        self.playing = True
 
     def start(self):
         self.new()    
@@ -66,12 +67,21 @@ class Game:
         self.surface.fill(LIGHT_BLUE) 
         self.sprites.draw(self.surface) ##Pintar la superficie
     def update(self):
-        pygame.display.flip() ## flip actualiza todo la superficie
-        self.sprites.update() ## todos los elementos de las listas ejecutaran su metodo update
-        self.player.validation_plataform(self.platform)
-        wall = self.player.collide_with(self.walls)
-        if wall:
-            self.stop()
+        if self.playing:
+            pygame.display.flip() ## flip actualiza todo la superficie
+            wall = self.player.collide_with(self.walls)
+            if wall:
+                self.stop()
+            self.sprites.update() ## todos los elementos de las listas ejecutaran su metodo update
+            self.player.validation_plataform(self.platform)
+
+
     def stop(self):
-        print("colision")
+        self.player.stop()
+        self.stop_element(self.walls)
+        self.playing = False
+
+    def stop_element(self, elements):
+        for element in elements:
+            element.stop()
 
