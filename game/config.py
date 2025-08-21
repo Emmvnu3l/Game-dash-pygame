@@ -23,5 +23,6 @@ MAX_WALLS = 10
 MAX_COINS = 10
 FPS = 60
 
+FONT = 'Arial'
 
 

@@ -23,6 +23,8 @@ class Game:
         self.dir = os.path.dirname(__file__)
         self.dir_sounds = os.path.join(self.dir, 'sources','sounds')
 
+        self.font = pygame.font.match_font(FONT)
+
     def start(self):
         self.new()    
     
@@ -87,6 +89,7 @@ class Game:
                             
     def draw(self):
         self.surface.fill(LIGHT_BLUE) 
+        self.draw_text()
         self.sprites.draw(self.surface) ##Pintar la superficie
     def update(self):
         if self.playing:
@@ -127,3 +130,17 @@ class Game:
         for element in elements:
             element.stop()
 
+    def score_format(self):
+        return 'Score : {}'.format(self.score)
+    
+    def draw_text(self):
+        self.display_text(self.score_format(), 36, WHITE, WIDTH // 2, 30)
+
+
+    def display_text(self, text, size, color, pos_x, pos_y):
+        font = pygame.font.Font(self.font, size)
+        text = font.render(text, True, color)
+        rect = text.get_rect()
+        rect.midtop = (pos_x, pos_y)
+
+        self.surface.blit(text, rect)
