@@ -30,6 +30,7 @@ class Game:
     
     def new(self):
         self.score = 0
+        self.level = 0
         self.generate_elements()
         self.run()
     
@@ -44,7 +45,6 @@ class Game:
         self.sprites.add(self.platform)
         self.sprites.add(self.player)
         self.generate_walls()
-        self.generate_coins()
     
     def generate_walls(self):
         last_position = WIDTH + 100 ##variable que otorga rango entre un obstaculo y otro
@@ -56,7 +56,9 @@ class Game:
 
                 self.sprites.add(wall)
                 self.walls.add(wall)
-                
+
+            self.level += 1
+            self.generate_coins()
 
     def generate_coins(self):
         last_position = WIDTH + 100
@@ -131,10 +133,14 @@ class Game:
             element.stop()
 
     def score_format(self):
-        return 'Score : {}'.format(self.score)
+        return 'Score: {}'.format(self.score)
+    
+    def level_format(self):
+        return 'Level: {}'.format(self.level)
     
     def draw_text(self):
-        self.display_text(self.score_format(), 36, WHITE, WIDTH // 2, 30)
+        self.display_text(self.score_format(), 36, WHITE, WIDTH // 2, TEXT_POSTY)
+        self.display_text(self.level_format(), 36, WHITE, 150, TEXT_POSTY)
 
 
     def display_text(self, text, size, color, pos_x, pos_y):

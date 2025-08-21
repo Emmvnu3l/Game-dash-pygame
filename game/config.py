@@ -20,9 +20,10 @@ SPEED = 5
 MAX_WALLS = 10
 
 
-MAX_COINS = 10
+MAX_COINS = 15
 FPS = 60
 
 FONT = 'Arial'
 
+TEXT_POSTY = 20
 
