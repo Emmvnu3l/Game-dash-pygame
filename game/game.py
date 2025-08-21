@@ -13,7 +13,7 @@ class Game:
         pygame.init()
         self.surface = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption(TITLE)
-        
+        self.clock = pygame.time.Clock()
         self.running = True
 
     def start(self):
@@ -48,7 +48,9 @@ class Game:
         while self.running:
             self.events()
             self.draw()
+            
             self.update()
+            self.clock.tick(FPS)
     def events(self):
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
