@@ -73,11 +73,11 @@ class Game:
 
     def run(self):
         while self.running:
-            self.events()
-            self.draw()
-            
-            self.update()
             self.clock.tick(FPS)
+            self.events()
+            self.update()
+            self.draw()
+
     def events(self):
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
@@ -93,29 +93,32 @@ class Game:
         self.surface.fill(LIGHT_BLUE) 
         self.draw_text()
         self.sprites.draw(self.surface) ##Pintar la superficie
-    def update(self):
-        if self.playing:
-            pygame.display.flip() ## flip actualiza todo la superficie
-            wall = self.player.collide_with(self.walls)
-            if wall:
-                if self.player.collide_bottom(wall):
-                    self.player.skid(wall)
-                else:    
-                    self.stop()
+        pygame.display.flip() ## flip actualiza todo la superficie
 
-            coin = self.player.collide_with(self.coins)
-            if coin:
-                self.score +=1
-                coin.kill()
-                sound = pygame.mixer.Sound(os.path.join(self.dir_sounds, 'coin.mp3'))
-                sound.play()
-                print(self.score)
-            self.sprites.update() ## todos los elementos de las listas ejecutaran su metodo update
-            self.player.validation_plataform(self.platform)
-            self.update_elements(self.walls)
-            self.update_elements(self.coins)
-            self.generate_walls()
-            ## Metodo para limpiar elementos
+    def update(self):
+        if not self.playing:
+            return
+        
+        wall = self.player.collide_with(self.walls)
+        if wall:
+            if self.player.collide_bottom(wall):
+                self.player.skid(wall)
+            else:    
+                self.stop()
+
+        coin = self.player.collide_with(self.coins)
+        if coin:
+            self.score +=1
+            coin.kill()
+            sound = pygame.mixer.Sound(os.path.join(self.dir_sounds, 'coin.mp3'))
+            sound.play()
+            print(self.score)
+        self.sprites.update() ## todos los elementos de las listas ejecutaran su metodo update
+        self.player.validation_plataform(self.platform)
+        self.update_elements(self.walls)
+        self.update_elements(self.coins)
+        self.generate_walls()
+        ## Metodo para limpiar elementos
     def update_elements(self, elements):
         for element in elements:
             if not element.rect.right > 0:
@@ -141,7 +144,9 @@ class Game:
     def draw_text(self):
         self.display_text(self.score_format(), 36, WHITE, WIDTH // 2, TEXT_POSTY)
         self.display_text(self.level_format(), 36, WHITE, 150, TEXT_POSTY)
-
+        if not self.playing:
+            self.display_text('Perdiste', 60, WHITE, WIDTH//2, 140) 
+            self.display_text('Presiona enter para comenzar de nuevo', 30, WHITE, WIDTH//2, 100)
 
     def display_text(self, text, size, color, pos_x, pos_y):
         font = pygame.font.Font(self.font, size)
