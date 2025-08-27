@@ -17,8 +17,6 @@ class Game:
         pygame.display.set_caption(TITLE)
         self.clock = pygame.time.Clock()
         self.running = True
-        self.playing = True
-
         ## creacion de ruta de sonidos
         self.dir = os.path.dirname(__file__)
         self.dir_sounds = os.path.join(self.dir, 'sources','sounds')
@@ -31,8 +29,10 @@ class Game:
     def new(self):
         self.score = 0
         self.level = 0
+        self.playing = True
         self.generate_elements()
         self.run()
+
     
     def generate_elements(self):
         self.platform = Platform()
@@ -84,10 +84,13 @@ class Game:
                 self.running = False
                 pygame.quit()
                 sys.exit()
-                
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_a:
-                    self.player.jump()
+        key = pygame.key.get_pressed()
+
+        if key[pygame.K_SPACE]:
+            self.player.jump()
+
+        if key[pygame.K_RETURN] and not self.playing:
+            self.new()
                             
     def draw(self):
         self.surface.fill(LIGHT_BLUE) 
