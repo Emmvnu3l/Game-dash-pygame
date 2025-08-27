@@ -24,6 +24,7 @@ class Game:
         self.font = pygame.font.match_font(FONT)
 
     def start(self):
+        self.menu()
         self.new()    
     
     def new(self):
@@ -158,3 +159,28 @@ class Game:
         rect.midtop = (pos_x, pos_y)
 
         self.surface.blit(text, rect)
+
+    ##solo mostraremos un texto
+    def menu(self):
+        #1 pintar superficie
+        self.surface.fill(GREEN)
+        self.display_text('precione una tecla para comenzar', 36, BLACK, WIDTH//2, 10)
+
+        #menu mistrado en la pantalla 
+        pygame.display.flip()
+        self.wait()
+    
+    ##metodo a la escucha de lo que sucede
+    def wait(self):
+        wait = True
+        while wait:
+            self.clock.tick(FPS)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    wait = False
+                    self.running = False
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYUP:
+                    wait = False
+                    
