@@ -22,7 +22,6 @@ Proyecto realizado en **Python** con la librería **Pygame** 🐍
   ```bash
    pip install pygame
 
-3. Corre el juego:
-  ```bash
-   run main.py
+--
 
+Run main.py
