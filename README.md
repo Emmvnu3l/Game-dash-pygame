@@ -18,10 +18,10 @@ Proyecto realizado en **Python** con la librería **Pygame** 🐍
    ```bash
    https://github.com/Emmvnu3l/Game-dash-pygame.git
    
-1. Instala la librería:
+2. Instala la librería:
   ```bash
    pip install pygame
-   
+
 3. Corre el juego:
   ```bash
    run main.py
