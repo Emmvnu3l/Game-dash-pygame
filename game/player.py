@@ -7,9 +7,16 @@ from .config import*
 class Player(pygame.sprite.Sprite):
     def __init__(self, left, bottom, dir_images):
         pygame.sprite.Sprite.__init__(self)
+
+        ##
+        self.images = (
+        pygame.image.load(os.path.join(dir_images, 'player.bmp')).convert_alpha(),
+        pygame.image.load(os.path.join(dir_images, 'player_up.png')).convert_alpha()
+
+        )
         
-        image= pygame.image.load(os.path.join(dir_images, 'player.bmp')).convert_alpha()
-        self.image = pygame.transform.scale_by(image, 2.0)
+        self.image = self.images[0]
+        self.image = pygame.transform.scale_by(self.image, 2.0)
 
         self.rect = self.image.get_rect()
         self.rect.left = left
@@ -33,6 +40,8 @@ class Player(pygame.sprite.Sprite):
         self.pos_y = wall.rect.top
         self.vel_y = 0
         self.can_jump = True
+        self.image = self.images[0]
+        self.image = pygame.transform.scale_by(self.image, 2.0)
         
     #metodo para que el player no sobrepase la plataforma
     def validation_plataform(self, platform):
@@ -41,11 +50,17 @@ class Player(pygame.sprite.Sprite):
             self.pos_y = platform.rect.top
             self.vel_y = 0
             self.can_jump = True
+            ## cuando colicionamos la imagen cambiara a 0
+            self.image = self.images[0]
+            self.image = pygame.transform.scale_by(self.image, 2.0)
 
     def jump(self):
         if self.can_jump == True:
             self.vel_y = -23
-            self.can_jump = False  
+            self.can_jump = False
+            ## cuando saltemos, la imagen cambiara a 1
+            self.image = self.images[1]
+            self.image = pygame.transform.scale_by(self.image, 2.0)
 
     def update_pos(self):
         self.vel_y += PLAYER_GRAV   # aplicamos gravedad a la velocidad
