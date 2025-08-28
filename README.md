@@ -17,6 +17,11 @@ Proyecto realizado en **Python** con la librería **Pygame** 🐍
 1. Clona el repositorio:
    ```bash
    https://github.com/Emmvnu3l/Game-dash-pygame.git
+   
+1. Instala la librería:
+  ```bash
    pip install pygame
+   
+3. Corre el juego:
    run main.py
 
