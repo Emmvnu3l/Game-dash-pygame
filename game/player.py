@@ -1,15 +1,15 @@
 import pygame
-
+import os
 
 from .colors import*
 from .config import*
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, left, bottom):
+    def __init__(self, left, bottom, dir_images):
         pygame.sprite.Sprite.__init__(self)
         
-        self.image = pygame.Surface((HEIGHT_PLAYER,WIDTH_PLAYER))
-        self.image.fill(WHITE)
+        image= pygame.image.load(os.path.join(dir_images, 'player.bmp')).convert_alpha()
+        self.image = pygame.transform.scale_by(image, 2.0)
 
         self.rect = self.image.get_rect()
         self.rect.left = left

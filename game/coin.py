@@ -1,16 +1,18 @@
 import pygame
+import os
 
 from .colors import *
 from .config import *
 
 class Coin(pygame.sprite.Sprite):
 
-    def __init__(self, pos_x, pos_y):
+    ## agregamos un nuevo atributo 'dir_images'
+    def __init__(self, pos_x, pos_y, dir_images):
 
         pygame.sprite.Sprite.__init__(self)
-
-        self.image= pygame.Surface((20,40))
-        self.image.fill(YELLOW)
+        ## cambiamos el atributo flip por una importacion de la imagen
+        image= pygame.image.load(os.path.join(dir_images, 'coin.png')).convert_alpha()
+        self.image = pygame.transform.scale_by(image, 0.08)
 
         self.rect = self.image.get_rect()
 
